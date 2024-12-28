@@ -15,10 +15,10 @@ const router: Router = useRouter();
 const text_field: Ref<string> = ref("12345");
 function log_in(event: KeyboardEvent | MouseEvent) {
     if (event instanceof MouseEvent) {
-        router.push({ name: "overview", params: { user_id: text_field.value } }) 
+        router.push({ name: "overview", params: { user_id: text_field.value } });
     }
     else if (event instanceof KeyboardEvent && event.key === "Enter") {
-        router.push({ name: "overview", params: { user_id: text_field.value } }) 
+        router.push({ name: "overview", params: { user_id: text_field.value } });
     }
 }
 </script>

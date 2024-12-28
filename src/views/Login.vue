@@ -34,8 +34,8 @@
 
     import { useRouter, type Router } from "vue-router";
     import { ref, type Ref } from 'vue';
+    import { BACKEND_URL } from "@/utils/constants";
     
-    const urlBackend: string = "http://localhost:5000/"
     const router: Router = useRouter();
     const errorMessage: Ref<string> = ref("");
     const successMessage: Ref<string> = ref("");
@@ -82,7 +82,7 @@
         errorMessage.value = check_user()
         successMessage.value = "";
         if (!errorMessage.value) {
-            fetch(`${urlBackend}/user_info/123`, {
+            fetch(`${BACKEND_URL}/user_info/123`, {
                 headers: {
                     "Content-Type": "application/json",
                 },

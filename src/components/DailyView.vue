@@ -3,7 +3,7 @@
         <div @click="() => changeDate(-1)" class="col-span-2 custom-border flex justify-center arrow-hover">
             <svg-icon type="mdi" :path="mdiArrowLeft"></svg-icon>
         </div>
-        <div class="col-span-8 custom-border flex justify-center">{{date_str}}</div>
+        <div class="col-span-8 custom-border flex justify-center text-white font-semibold">{{date_str}}</div>
         <div @click="() => changeDate(1)" class="col-span-2 custom-border flex justify-center arrow-hover">
             <svg-icon type="mdi" :path="mdiArrowRight"></svg-icon>
         </div>

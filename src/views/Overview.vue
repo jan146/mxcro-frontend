@@ -23,14 +23,14 @@
             <div class="col-span-1 custom-border">{{date}}</div>
             <div class="col-span-1 custom-border">Arrow right</div>
             <div class="col-span-2 row-span-3">
+                <div class="col-span-2 custom-border">Arrow up</div>
                 <div class="col-span-2 custom-border">Entry</div>
                 <div class="col-span-2 custom-border">Entry</div>
                 <div class="col-span-2 custom-border">Entry</div>
+                <div class="col-span-2 custom-border">Arrow down</div>
             </div>
             <div class="col-span-1 row-span-3 bg-green-400 custom-border">Add entry</div>
-            <!-- <div class="col-span-1 row-span-3 bg-blue-200 custom-border">Add entry</div> -->
-            <!-- <div class="col-span-1 bg-green-200 custom-border">Main Content</div> -->
-            <!-- <div class="col-span-1 bg-red-200 custom-border">Footer</div> -->
+            <!-- <div class="col-span-3 bg-red-200 custom-border">Footer</div> -->
         </div>
     </div>
 </template>
@@ -72,6 +72,6 @@
 
 <style scoped>
 .custom-border {
-  @apply border border-4 border-gray-100;
+  @apply border border-2 border-gray-100;
 }
 </style>

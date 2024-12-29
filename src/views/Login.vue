@@ -1,9 +1,7 @@
 <template>
     <div>
-        <div class="font-bold text-lg text-white">Enter user_id:</div>
-        <div class="flex gap-2">
-            <input v-model="userId" type="text" class="text-lg text-black w-64" @keyup="logIn"/>
-            <button @click="logIn" type="button" class="bg-gray-500 text-base border-4 border-white rounded-md text-white p-1 font-semibold">Submit</button>
+        <div>
+            <EnterUserId />
         </div>
         <div class="mt-8 font-bold text-lg text-white">Or make new user</div>
         <div class="flex flex-col gap-2">
@@ -32,14 +30,12 @@
 
 <script setup lang="ts">
 
-    import { useRouter, type Router } from "vue-router";
     import { ref, type Ref } from 'vue';
     import { BACKEND_URL } from "@/utils/constants";
+    import EnterUserId from "@/components/EnterUserId.vue";
     
-    const router: Router = useRouter();
     const errorMessage: Ref<string> = ref("");
     const successMessage: Ref<string> = ref("");
-    const userId: Ref<string> = ref("123");
     const username: Ref<string> = ref("");
     const age: Ref<string> = ref("");
     const height: Ref<string> = ref("");
@@ -99,15 +95,6 @@
             .catch(err => errorMessage.value = err)
         }
 
-    }
-    
-    function logIn(event: KeyboardEvent | MouseEvent) {
-        if (event instanceof MouseEvent) {
-            router.push({ name: "overview", params: { user_id: userId.value } });
-        }
-        else if (event instanceof KeyboardEvent && event.key === "Enter") {
-            router.push({ name: "overview", params: { user_id: userId.value } });
-        }
     }
 
 </script>

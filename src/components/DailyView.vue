@@ -1,10 +1,10 @@
 <template>
     <div class="grid grid-cols-12 gap-0 custom-border rounded-md">
-        <div class="col-span-2 custom-border flex justify-center arrow-hover">
+        <div @click="() => changeDate(-1)" class="col-span-2 custom-border flex justify-center arrow-hover">
             <svg-icon type="mdi" :path="mdiArrowLeft"></svg-icon>
         </div>
-        <div class="col-span-8 custom-border flex justify-center">{{date}}</div>
-        <div class="col-span-2 custom-border flex justify-center arrow-hover">
+        <div class="col-span-8 custom-border flex justify-center">{{date_str}}</div>
+        <div @click="() => changeDate(1)" class="col-span-2 custom-border flex justify-center arrow-hover">
             <svg-icon type="mdi" :path="mdiArrowRight"></svg-icon>
         </div>
         <div class="col-span-11 row-span-3">
@@ -27,10 +27,19 @@
 
 <script setup lang="ts">
 
-    import SvgIcon from '@jamescoyle/vue-icon'
-    import { mdiArrowUp, mdiArrowDown, mdiArrowLeft, mdiArrowRight, mdiPlusCircle } from '@mdi/js'
+    import { ref, type Ref } from 'vue';
+    import SvgIcon from '@jamescoyle/vue-icon';
+    import { mdiArrowUp, mdiArrowDown, mdiArrowLeft, mdiArrowRight, mdiPlusCircle } from '@mdi/js';
 
-    const date: string = new Date().toLocaleString("en-GB", { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' });
+    const today: Date = new Date();
+    let date: Date = new Date();
+    let date_str: Ref<string> = ref(date.toLocaleString("en-GB", { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' }) + " (today)");
+
+    function changeDate(change: number) {
+        const target: Date = new Date(date.getTime() + change * (1000*60*60*24));
+        date = (target >= today ? today : target);
+        date_str.value = date.toLocaleString("en-GB", { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' }) + (target >= today ? " (today)" : "");
+    }
 
 </script>
 

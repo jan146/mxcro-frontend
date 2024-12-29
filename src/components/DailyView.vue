@@ -18,11 +18,12 @@
                 <svg-icon type="mdi" :path="mdiArrowDown"></svg-icon>
             </div>
         </div>
-        <div class="col-span-1 row-span-3 bg-green-400 custom-border flex items-center justify-center group hover:bg-white transition-colors duration-200">
+        <div class="col-span-1 row-span-3 bg-green-400 custom-border flex items-center justify-center group hover:bg-white transition-colors duration-200" @click="addItem">
             <svg-icon class="text-white group-hover:text-green-300 transition-colors duration-200" type="mdi" :path="mdiPlusCircle"></svg-icon>
         </div>
         <!-- <div class="col-span-3 bg-red-200 custom-border">Footer</div> -->
     </div>
+    <AddItem />
 </template>
 
 <script setup lang="ts">
@@ -30,6 +31,7 @@
     import { ref, type Ref } from 'vue';
     import SvgIcon from '@jamescoyle/vue-icon';
     import { mdiArrowUp, mdiArrowDown, mdiArrowLeft, mdiArrowRight, mdiPlusCircle } from '@mdi/js';
+    import AddItem from './AddItem.vue';
 
     const today: Date = new Date();
     let date: Date = new Date();
@@ -39,6 +41,10 @@
         const target: Date = new Date(date.getTime() + change * (1000*60*60*24));
         date = (target >= today ? today : target);
         date_str.value = date.toLocaleString("en-GB", { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' }) + (target >= today ? " (today)" : "");
+    }
+
+    function addItem() {
+
     }
 
 </script>

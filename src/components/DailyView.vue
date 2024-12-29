@@ -1,5 +1,5 @@
 <template>
-    <div class="grid grid-cols-12 gap-0 custom-border">
+    <div class="grid grid-cols-12 gap-0 custom-border rounded-md">
         <div class="col-span-2 custom-border flex justify-center arrow-hover">
             <svg-icon type="mdi" :path="mdiArrowLeft"></svg-icon>
         </div>

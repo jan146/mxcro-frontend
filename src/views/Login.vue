@@ -2,8 +2,8 @@
     <div>
         <div class="font-bold text-lg text-white">Enter user_id:</div>
         <div class="flex gap-2">
-            <input v-model="user_id" type="text" class="text-lg text-black w-64" @keyup="log_in"/>
-            <button @click="log_in" type="button" class="bg-gray-500 text-base border-4 border-white rounded-md text-white p-1 font-semibold">Submit</button>
+            <input v-model="userId" type="text" class="text-lg text-black w-64" @keyup="logIn"/>
+            <button @click="logIn" type="button" class="bg-gray-500 text-base border-4 border-white rounded-md text-white p-1 font-semibold">Submit</button>
         </div>
         <div class="mt-8 font-bold text-lg text-white">Or make new user</div>
         <div class="flex flex-col gap-2">
@@ -24,7 +24,7 @@
                 <input v-model="weight" type="text" class="text-lg w-24 text-black"/>
             </div>
         </div>
-        <button @click="create_user" type="button" class="bg-gray-500 text-base border-4 border-white rounded-md text-white p-1 font-semibold">Create</button>
+        <button @click="createUser" type="button" class="bg-gray-500 text-base border-4 border-white rounded-md text-white p-1 font-semibold">Create</button>
         <div v-html="errorMessage" class="text-red-600 font-semibold text-lg"></div>
         <div v-html="successMessage" class="text-green-600 font-semibold text-lg"></div>
     </div>
@@ -39,28 +39,28 @@
     const router: Router = useRouter();
     const errorMessage: Ref<string> = ref("");
     const successMessage: Ref<string> = ref("");
-    const user_id: Ref<string> = ref("123");
+    const userId: Ref<string> = ref("123");
     const username: Ref<string> = ref("");
     const age: Ref<string> = ref("");
     const height: Ref<string> = ref("");
     const weight: Ref<string> = ref("");
 
-    function check_user(): string {
+    function checkUser(): string {
         let error = "";
-        let weight_num: number = parseInt(weight.value);
-        let height_num: number = parseInt(height.value);
-        let age_num: number = parseInt(age.value);
-        if (isNaN(weight_num))
+        let weightNum: number = parseInt(weight.value);
+        let heightNum: number = parseInt(height.value);
+        let ageNum: number = parseInt(age.value);
+        if (isNaN(weightNum))
             error = "weight must be a number";
-        if (weight_num < 1 || weight_num > 500)
+        if (weightNum < 1 || weightNum > 500)
             error = "weight must be between 1 and 500";
-        if (isNaN(height_num))
+        if (isNaN(heightNum))
             error = "height must be a number";
-        if (height_num < 50 || height_num > 300)
+        if (heightNum < 50 || heightNum > 300)
             error = "height must be between 50 and 300";
-        if (isNaN(age_num))
+        if (isNaN(ageNum))
             error = "age must be a number";
-        if (age_num < 15 || age_num > 100)
+        if (ageNum < 15 || ageNum > 100)
             error = "age must be between 15 and 100";
             
         if (!weight.value)
@@ -77,9 +77,9 @@
         return error;
     }
 
-    function create_user() {
+    function createUser() {
 
-        errorMessage.value = check_user()
+        errorMessage.value = checkUser()
         successMessage.value = "";
         if (!errorMessage.value) {
             fetch(`${BACKEND_URL}/user_info/123`, {
@@ -101,12 +101,12 @@
 
     }
     
-    function log_in(event: KeyboardEvent | MouseEvent) {
+    function logIn(event: KeyboardEvent | MouseEvent) {
         if (event instanceof MouseEvent) {
-            router.push({ name: "overview", params: { user_id: user_id.value } });
+            router.push({ name: "overview", params: { user_id: userId.value } });
         }
         else if (event instanceof KeyboardEvent && event.key === "Enter") {
-            router.push({ name: "overview", params: { user_id: user_id.value } });
+            router.push({ name: "overview", params: { user_id: userId.value } });
         }
     }
 

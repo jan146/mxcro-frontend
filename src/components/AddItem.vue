@@ -12,6 +12,8 @@
             <div class="p-1">
                 <button @click="submit" type="button" class="bg-zinc-500 text-base rounded-xl text-white p-2 font-semibold border-2 border-transparent hover:bg-zinc-100 hover:text-zinc-900 hover:border-zinc-900 transition-colors duration-200">Create</button>
             </div>
+            <div v-html="errorMessage" class="text-red-600 font-semibold text-lg px-2"></div>
+            <div v-html="successMessage" class="text-green-600 font-semibold text-lg px-2"></div>
         </div>
         <div class="p-2 hover:bg-zinc-200 rounded-xl inline-block absolute top-0 left-0" @click="$emit('addItemToggle')">
             <svg-icon type="mdi" :path="mdiArrowLeft"></svg-icon>
@@ -27,9 +29,31 @@
 
     const foodName: Ref<string> = ref("");
     const weight: Ref<string> = ref("");
+    const errorMessage: Ref<string> = ref("");
+    const successMessage: Ref<string> = ref("");
+
+    function checkFood(): string {
+        let error: string = "";
+        const weightNum: number = parseInt(weight.value);
+        if ((weightNum < 1) || (weightNum > 10000))
+            error = "weight must be a number between 1 and 10,000"
+        if (isNaN(weightNum))
+            error = "weight must be a number";
+        if (!weight.value)
+            error = "weight can't be empty";
+        if (!foodName.value)
+            error = "food name can't be empty";
+        if (error)
+            error = `Error: ${error}`;
+        return error;
+    }
 
     function submit() {
-        // TODO
+        errorMessage.value = checkFood();
+        if (!errorMessage.value)
+            successMessage.value = `Successfully submitted new entry:\n${weight.value} grams of ${foodName.value}`
+        else
+            successMessage.value = "";
     }
 
 </script>

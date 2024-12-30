@@ -1,5 +1,5 @@
 <template>
-    <div class="grid grid-cols-12 gap-0 custom-border rounded-md">
+    <div class="grid grid-cols-12 gap-0 custom-border rounded-md size-full">
         <div @click="() => changeDate(-1)" class="col-span-2 custom-border flex justify-center arrow-hover">
             <svg-icon type="mdi" :path="mdiArrowLeft"></svg-icon>
         </div>
@@ -7,7 +7,7 @@
         <div @click="() => changeDate(1)" class="col-span-2 custom-border flex justify-center arrow-hover">
             <svg-icon type="mdi" :path="mdiArrowRight"></svg-icon>
         </div>
-        <div class="col-span-11 row-span-3">
+        <div class="col-span-11 row-span-3 grid grid-rows-5">
             <div class="col-span-2 custom-border flex justify-center arrow-hover">
                 <svg-icon type="mdi" :path="mdiArrowUp"></svg-icon>
             </div>

@@ -1,5 +1,5 @@
 <template>
-    <div class="border-4 border-white rounded-md bg-white text-black">
+    <div class="border-4 border-white rounded-md bg-white text-black size-full">
         <div class="p-2 hover:bg-zinc-200 rounded-xl inline-block" @click="$emit('addItemToggle')">
             <svg-icon type="mdi" :path="mdiArrowLeft"></svg-icon>
         </div>

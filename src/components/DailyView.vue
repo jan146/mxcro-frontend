@@ -1,9 +1,11 @@
 <template>
-    <div v-if="addItemShown">
-        <AddItem :addItemShown @add-item-toggle="addItemToggle" />
-    </div>
-    <div v-else>
-        <DailyViewCalendar :addItemShown @add-item-toggle="addItemToggle" />
+    <div class="w-64 h-52">
+        <div class="size-full" v-if="addItemShown">
+            <AddItem :addItemShown @add-item-toggle="addItemToggle" />
+        </div>
+        <div class="size-full" v-else>
+            <DailyViewCalendar :addItemShown @add-item-toggle="addItemToggle" />
+        </div>
     </div>
 </template>
 

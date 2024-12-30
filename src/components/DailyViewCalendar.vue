@@ -1,24 +1,24 @@
 <template>
     <div class="grid grid-cols-12 gap-0 custom-border rounded-md size-full">
-        <div @click="() => changeDate(-1)" class="col-span-2 custom-border flex justify-center arrow-hover">
+        <div @click="() => changeDate(-1)" class="col-span-2 custom-border flex justify-center items-center arrow-hover">
             <svg-icon type="mdi" :path="mdiArrowLeft"></svg-icon>
         </div>
-        <div class="col-span-8 custom-border flex justify-center text-white font-semibold">{{date_str}}</div>
-        <div @click="() => changeDate(1)" class="col-span-2 custom-border flex justify-center arrow-hover">
+        <div class="col-span-8 custom-border flex justify-center items-center text-white font-semibold">{{date_str}}</div>
+        <div @click="() => changeDate(1)" class="col-span-2 custom-border flex justify-center items-center arrow-hover">
             <svg-icon type="mdi" :path="mdiArrowRight"></svg-icon>
         </div>
-        <div class="col-span-11 row-span-3 grid grid-rows-5">
-            <div class="col-span-2 custom-border flex justify-center arrow-hover">
+        <div class="col-span-10 row-span-3 grid grid-rows-5">
+            <div class="col-span-2 custom-border flex justify-center items-center arrow-hover">
                 <svg-icon type="mdi" :path="mdiArrowUp"></svg-icon>
             </div>
-            <div class="col-span-2 custom-border">Entry</div>
-            <div class="col-span-2 custom-border">Entry</div>
-            <div class="col-span-2 custom-border">Entry</div>
-            <div class="col-span-2 custom-border flex justify-center arrow-hover">
+            <div class="col-span-2 flex items-center custom-border px-1">Entry</div>
+            <div class="col-span-2 flex items-center custom-border px-1">Entry</div>
+            <div class="col-span-2 flex items-center custom-border px-1">Entry</div>
+            <div class="col-span-2 custom-border flex justify-center items-center arrow-hover">
                 <svg-icon type="mdi" :path="mdiArrowDown"></svg-icon>
             </div>
         </div>
-        <div class="col-span-1 row-span-3 bg-green-400 custom-border flex items-center justify-center group hover:bg-white transition-colors duration-200" @click="$emit('addItemToggle')">
+        <div class="col-span-2 row-span-3 bg-green-400 custom-border flex items-center justify-center group hover:bg-white transition-colors duration-200" @click="$emit('addItemToggle')">
             <svg-icon class="text-white group-hover:text-green-300 transition-colors duration-200" type="mdi" :path="mdiPlusCircle"></svg-icon>
         </div>
         <!-- <div class="col-span-3 bg-red-200 custom-border">Footer</div> -->

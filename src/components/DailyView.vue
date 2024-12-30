@@ -1,5 +1,5 @@
 <template>
-    <div class="w-64 h-52">
+    <div class="w-80 h-80">
         <div class="size-full" v-if="addItemShown">
             <AddItem :addItemShown @add-item-toggle="addItemToggle" />
         </div>

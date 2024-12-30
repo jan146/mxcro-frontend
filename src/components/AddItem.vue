@@ -25,9 +25,6 @@
     import SvgIcon from '@jamescoyle/vue-icon';
     import { mdiArrowLeft } from '@mdi/js';
 
-    const props = defineProps({
-      addItemShown: { type: Boolean, required: true },
-    })
     const foodName: Ref<string> = ref("");
     const weight: Ref<string> = ref("");
 

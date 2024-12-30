@@ -30,9 +30,6 @@
     import { ref, type Ref } from 'vue';
     import SvgIcon from '@jamescoyle/vue-icon';
     import { mdiArrowUp, mdiArrowDown, mdiArrowLeft, mdiArrowRight, mdiPlusCircle } from '@mdi/js';
-    const props = defineProps({
-      addItemShown: { type: Boolean, required: true },
-    })
 
     const today: Date = new Date();
     let date: Date = new Date();
@@ -42,10 +39,6 @@
         const target: Date = new Date(date.getTime() + change * (1000*60*60*24));
         date = (target >= today ? today : target);
         dateStr.value = date.toLocaleString("en-GB", { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' }) + (target >= today ? " (today)" : "");
-    }
-
-    function addItem() {
-        props.addItemShown = !props.addItemShown;
     }
 
 </script>

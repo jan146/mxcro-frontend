@@ -23,10 +23,13 @@
 
 <script setup lang="ts">
 
+    import { useRoute, type RouteLocationNormalizedLoaded as Route } from "vue-router";
     import { ref, type Ref } from 'vue';
     import SvgIcon from '@jamescoyle/vue-icon';
     import { mdiArrowLeft } from '@mdi/js';
+    import { BACKEND_URL } from '@/utils/constants';
 
+    const route: Route = useRoute();
     const foodName: Ref<string> = ref("");
     const weight: Ref<string> = ref("");
     const errorMessage: Ref<string> = ref("");
@@ -50,10 +53,26 @@
 
     function submit() {
         errorMessage.value = checkFood();
-        if (!errorMessage.value)
-            successMessage.value = `Successfully submitted new entry:\n${weight.value} grams of ${foodName.value}`
-        else
+        if (errorMessage.value)
             successMessage.value = "";
+        else {
+            fetch(`${BACKEND_URL}/logged_item/${route.params.user_id}`, {
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                method: "POST",
+                body: JSON.stringify({
+                    "food_name": foodName.value,
+                    "weight": weight.value,
+                }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                // successMessage.value = JSON.stringify(data);
+                successMessage.value = `Successfully submitted new entry:\n${weight.value} grams of ${foodName.value}`;
+            })
+            .catch(err => errorMessage.value = err)
+        }
     }
 
 </script>

@@ -18,7 +18,7 @@
                 <svg-icon type="mdi" :path="mdiArrowDown"></svg-icon>
             </div>
         </div>
-        <div class="col-span-1 row-span-3 bg-green-400 custom-border flex items-center justify-center group hover:bg-white transition-colors duration-200" @click="addItem">
+        <div class="col-span-1 row-span-3 bg-green-400 custom-border flex items-center justify-center group hover:bg-white transition-colors duration-200" @click="$emit('addItemToggle')">
             <svg-icon class="text-white group-hover:text-green-300 transition-colors duration-200" type="mdi" :path="mdiPlusCircle"></svg-icon>
         </div>
         <!-- <div class="col-span-3 bg-red-200 custom-border">Footer</div> -->
@@ -30,6 +30,9 @@
     import { ref, type Ref } from 'vue';
     import SvgIcon from '@jamescoyle/vue-icon';
     import { mdiArrowUp, mdiArrowDown, mdiArrowLeft, mdiArrowRight, mdiPlusCircle } from '@mdi/js';
+    const props = defineProps({
+      addItemShown: { type: Boolean, required: true },
+    })
 
     const today: Date = new Date();
     let date: Date = new Date();
@@ -42,7 +45,7 @@
     }
 
     function addItem() {
-        // TODO
+        props.addItemShown = !props.addItemShown;
     }
 
 </script>

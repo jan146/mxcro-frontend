@@ -1,6 +1,6 @@
 <template>
     <div class="border-4 border-white rounded-md bg-white text-black">
-        <div class="p-2 hover:bg-zinc-200 rounded-xl inline-block">
+        <div class="p-2 hover:bg-zinc-200 rounded-xl inline-block" @click="$emit('addItemToggle')">
             <svg-icon type="mdi" :path="mdiArrowLeft"></svg-icon>
         </div>
         <div class="flex flex-col items-center">
@@ -25,6 +25,9 @@
     import SvgIcon from '@jamescoyle/vue-icon';
     import { mdiArrowLeft } from '@mdi/js';
 
+    const props = defineProps({
+      addItemShown: { type: Boolean, required: true },
+    })
     const foodName: Ref<string> = ref("");
     const weight: Ref<string> = ref("");
 

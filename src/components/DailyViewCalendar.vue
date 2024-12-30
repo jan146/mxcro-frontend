@@ -3,7 +3,7 @@
         <div @click="() => changeDate(-1)" class="col-span-2 custom-border flex justify-center items-center arrow-hover">
             <svg-icon type="mdi" :path="mdiArrowLeft"></svg-icon>
         </div>
-        <div class="col-span-8 custom-border flex justify-center items-center text-white font-semibold">{{date_str}}</div>
+        <div class="col-span-8 custom-border flex justify-center items-center text-white font-semibold">{{dateStr}}</div>
         <div @click="() => changeDate(1)" class="col-span-2 custom-border flex justify-center items-center arrow-hover">
             <svg-icon type="mdi" :path="mdiArrowRight"></svg-icon>
         </div>
@@ -36,12 +36,12 @@
 
     const today: Date = new Date();
     let date: Date = new Date();
-    let date_str: Ref<string> = ref(date.toLocaleString("en-GB", { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' }) + " (today)");
+    let dateStr: Ref<string> = ref(date.toLocaleString("en-GB", { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' }) + " (today)");
 
     function changeDate(change: number) {
         const target: Date = new Date(date.getTime() + change * (1000*60*60*24));
         date = (target >= today ? today : target);
-        date_str.value = date.toLocaleString("en-GB", { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' }) + (target >= today ? " (today)" : "");
+        dateStr.value = date.toLocaleString("en-GB", { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' }) + (target >= today ? " (today)" : "");
     }
 
     function addItem() {

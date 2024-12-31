@@ -37,7 +37,7 @@
     let dateStr: Ref<string> = ref(date.toLocaleString("en-GB", { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' }) + " (today)");
     const props = defineProps({
         loggedItems: { type: Array<object>, required: true },
-    })
+    });
     let loggedItemsOffset: Ref<number> = ref(0);
     const emit = defineEmits({
         updateLoggedItems: (from_date: Date, to_date: Date) => {
@@ -49,8 +49,11 @@
     function changeDate(change: number) {
         const target: Date = new Date(date.getTime() + change * (1000*60*60*24));
         date = (target >= today ? today : target);
-        emit("updateLoggedItems", date, date);
         dateStr.value = date.toLocaleString("en-GB", { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' }) + (target >= today ? " (today)" : "");
+        if (target <= today) {
+            loggedItemsOffset.value = 0;
+            emit("updateLoggedItems", date, date);
+        }
     }
 
     function scrollItems(change: number) {

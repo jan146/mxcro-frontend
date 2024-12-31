@@ -44,6 +44,8 @@
                     height.value = data["height"];
                     weight.value = data["weight"];
                 }
+                else
+                    console.error(data.error);
             })
             .catch(err => {
                 offline.value = true;

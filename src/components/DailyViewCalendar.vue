@@ -27,7 +27,6 @@
 
 <script setup lang="ts">
 
-    import { defineEmits } from 'vue';
     import { ref, type Ref, computed, type ComputedRef } from 'vue';
     import SvgIcon from '@jamescoyle/vue-icon';
     import { mdiArrowUp, mdiArrowDown, mdiArrowLeft, mdiArrowRight, mdiPlusCircle } from '@mdi/js';

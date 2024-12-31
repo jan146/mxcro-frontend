@@ -11,7 +11,6 @@
 
 <script setup lang="ts">
 
-    import { defineEmits } from 'vue';
     import { ref, type Ref } from 'vue';
     import AddItem from './AddItem.vue';
     import DailyViewCalendar from './DailyViewCalendar.vue';

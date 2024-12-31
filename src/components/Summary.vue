@@ -1,7 +1,15 @@
 <template>
-    <div>
-        <div v-for="nutrient in NUTRIENTS_ORDERED">
-            {{toTitleCase(nutrient)}}: {{get_nutrient_summed(nutrient).toFixed(1)}}/{{NUTRIENTS_RDA[nutrient]}} ({{(100*get_nutrient_summed(nutrient).toFixed(1)/NUTRIENTS_RDA[nutrient]).toFixed(1)}}%)
+    <div class="border-4 border-white rounded-lg p-2 w-full">
+        <div v-for="nutrient in NUTRIENTS_ORDERED" class="relative">
+            <div class="text-white font-medium">
+                {{toTitleCase(nutrient)}}
+            </div>
+            <div class="flex justify-end w-full absolute top-0 left-0 text-white">
+                {{getNutrientSummed(nutrient).toFixed(1)}}/{{NUTRIENTS_RDA[nutrient]}} ({{getNutrientPercentage(nutrient)}})
+            </div>
+            <div class="border-2 border-white mb-2 h-4 rounded-xl">
+                <div class="h-full bg-white rounded-xl" :style="{ width: getNutrientPercentage(nutrient) }"></div>
+            </div>
         </div>
     </div>
 </template>
@@ -15,11 +23,15 @@
         loggedItems: { type: Array<object>, required: true },
     });
 
-    function get_nutrient_summed(nutrient: string): number {
+    function getNutrientSummed(nutrient: string): number {
         let sum: number = 0;
         for (const loggedItem of props.loggedItems)
             sum += loggedItem[nutrient];
         return sum;
+    }
+
+    function getNutrientPercentage(nutrient: string): string {
+        return (100*getNutrientSummed(nutrient)/NUTRIENTS_RDA[nutrient]).toFixed(1) + "%";
     }
 
 </script>

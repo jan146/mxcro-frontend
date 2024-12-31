@@ -26,7 +26,10 @@
     }
 
     onMounted(() => {
-        fetch(`${BACKEND_URL}/logged_item/${route.params.user_id}`)
+        fetch(`${BACKEND_URL}/logged_item/${route.params.user_id}` + "?" + new URLSearchParams({
+            from: new Date().toLocaleDateString(),
+            to: new Date().toLocaleDateString(),
+        }).toString())
             .then(response => response.json())
             .then(data => {
                 if (!data.error) {

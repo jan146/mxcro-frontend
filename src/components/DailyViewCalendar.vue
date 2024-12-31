@@ -56,8 +56,8 @@
 
     function scrollItems(change: number) {
         loggedItemsOffset.value += change;
-        loggedItemsOffset.value = Math.max(0, loggedItemsOffset.value);
         loggedItemsOffset.value = Math.min(props.loggedItems.length - 3, loggedItemsOffset.value);
+        loggedItemsOffset.value = Math.max(0, loggedItemsOffset.value);
     }
 
     function getLoggedItemStr(offset: number): ComputedRef<string> {

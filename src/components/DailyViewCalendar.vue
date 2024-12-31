@@ -27,6 +27,7 @@
 
 <script setup lang="ts">
 
+    import { defineEmits } from 'vue';
     import { ref, type Ref, computed, type ComputedRef } from 'vue';
     import SvgIcon from '@jamescoyle/vue-icon';
     import { mdiArrowUp, mdiArrowDown, mdiArrowLeft, mdiArrowRight, mdiPlusCircle } from '@mdi/js';
@@ -38,10 +39,17 @@
         loggedItems: { type: Array<object>, required: true },
     })
     let loggedItemsOffset: Ref<number> = ref(0);
+    const emit = defineEmits({
+        updateLoggedItems: (from_date: Date, to_date: Date) => {
+            return (from_date instanceof Date && to_date instanceof Date);
+        },
+        addItemToggle: () => {return true},
+    });
 
     function changeDate(change: number) {
         const target: Date = new Date(date.getTime() + change * (1000*60*60*24));
         date = (target >= today ? today : target);
+        emit("updateLoggedItems", date, date);
         dateStr.value = date.toLocaleString("en-GB", { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' }) + (target >= today ? " (today)" : "");
     }
 

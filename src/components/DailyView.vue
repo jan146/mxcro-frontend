@@ -4,7 +4,7 @@
             <AddItem @add-item-toggle="addItemToggle" />
         </div>
         <div class="size-full" v-else>
-            <DailyViewCalendar @add-item-toggle="addItemToggle" :loggedItems="loggedItems" />
+            <DailyViewCalendar @add-item-toggle="addItemToggle" :loggedItems="loggedItems" @update-logged-items="updateLoggedItems" />
         </div>
     </div>
 </template>
@@ -25,10 +25,10 @@
         addItemShown.value = !addItemShown.value;
     }
 
-    onMounted(() => {
+    function updateLoggedItems(from_date: Date, to_date: Date) {
         fetch(`${BACKEND_URL}/logged_item/${route.params.user_id}` + "?" + new URLSearchParams({
-            from: new Date().toLocaleDateString(),
-            to: new Date().toLocaleDateString(),
+            from: from_date.toLocaleDateString(),
+            to: to_date.toLocaleDateString(),
         }).toString())
             .then(response => response.json())
             .then(data => {
@@ -44,6 +44,10 @@
             .catch(err => {
                 console.error(err);
             })
+    }
+
+    onMounted(() => {
+        updateLoggedItems(new Date(), new Date());
     })
 
 </script>

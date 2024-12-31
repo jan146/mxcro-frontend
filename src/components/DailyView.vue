@@ -1,10 +1,10 @@
 <template>
     <div class="w-80 h-80">
         <div class="size-full" v-if="addItemShown">
-            <AddItem :addItemShown @add-item-toggle="addItemToggle" />
+            <AddItem @add-item-toggle="addItemToggle" />
         </div>
         <div class="size-full" v-else>
-            <DailyViewCalendar :addItemShown @add-item-toggle="addItemToggle" />
+            <DailyViewCalendar @add-item-toggle="addItemToggle" :loggedItems="loggedItems" />
         </div>
     </div>
 </template>
@@ -29,8 +29,12 @@
         fetch(`${BACKEND_URL}/logged_item/${route.params.user_id}`)
             .then(response => response.json())
             .then(data => {
-                if (!data.error)
-                    loggedItems = data.logged_items;
+                if (!data.error) {
+                    // Clear list
+                    loggedItems.splice(0, loggedItems.length);
+                    // Update list with fetched items
+                    loggedItems.push(...data.logged_items);
+                }
                 else
                     console.error(data.error);
             })

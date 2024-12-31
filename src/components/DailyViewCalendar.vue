@@ -8,13 +8,13 @@
             <svg-icon type="mdi" :path="mdiArrowRight"></svg-icon>
         </div>
         <div class="col-span-10 row-span-3 grid grid-rows-5">
-            <div class="col-span-2 custom-border flex justify-center items-center arrow-hover">
+            <div class="col-span-2 custom-border flex justify-center items-center arrow-hover" @click="() => scrollItems(-1)">
                 <svg-icon type="mdi" :path="mdiArrowUp"></svg-icon>
             </div>
-            <div class="col-span-2 flex items-center custom-border px-1">Entry</div>
-            <div class="col-span-2 flex items-center custom-border px-1">Entry</div>
-            <div class="col-span-2 flex items-center custom-border px-1">Entry</div>
-            <div class="col-span-2 custom-border flex justify-center items-center arrow-hover">
+            <div class="col-span-2 flex items-center custom-border px-1">{{ getLoggedItemStr(0) }}</div>
+            <div class="col-span-2 flex items-center custom-border px-1">{{ getLoggedItemStr(1) }}</div>
+            <div class="col-span-2 flex items-center custom-border px-1">{{ getLoggedItemStr(2) }}</div>
+            <div class="col-span-2 custom-border flex justify-center items-center arrow-hover" @click="() => scrollItems(1)">
                 <svg-icon type="mdi" :path="mdiArrowDown"></svg-icon>
             </div>
         </div>
@@ -27,18 +27,39 @@
 
 <script setup lang="ts">
 
-    import { ref, type Ref } from 'vue';
+    import { ref, type Ref, computed, type ComputedRef } from 'vue';
     import SvgIcon from '@jamescoyle/vue-icon';
     import { mdiArrowUp, mdiArrowDown, mdiArrowLeft, mdiArrowRight, mdiPlusCircle } from '@mdi/js';
 
     const today: Date = new Date();
     let date: Date = new Date();
     let dateStr: Ref<string> = ref(date.toLocaleString("en-GB", { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' }) + " (today)");
+    const props = defineProps({
+        loggedItems: { type: Array<object>, required: true },
+    })
+    let loggedItemsOffset: Ref<number> = ref(0);
 
     function changeDate(change: number) {
         const target: Date = new Date(date.getTime() + change * (1000*60*60*24));
         date = (target >= today ? today : target);
         dateStr.value = date.toLocaleString("en-GB", { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' }) + (target >= today ? " (today)" : "");
+    }
+
+    function scrollItems(change: number) {
+        loggedItemsOffset.value += change;
+        loggedItemsOffset.value = Math.max(0, loggedItemsOffset.value);
+        loggedItemsOffset.value = Math.min(props.loggedItems.length - 3, loggedItemsOffset.value);
+    }
+
+    function getLoggedItemStr(offset: number): ComputedRef<string> {
+        const getLoggedItemStrParametrized = computed<string>(() => {
+            const logged_item: object = props.loggedItems[loggedItemsOffset.value+offset];
+            if (logged_item)
+                return `${logged_item.weight_g}g × ${logged_item.name}`;
+            else
+                return "Entry";
+        });
+        return getLoggedItemStrParametrized;
     }
 
 </script>

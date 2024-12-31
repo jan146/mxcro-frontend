@@ -11,28 +11,10 @@
             <div class="col-span-2 custom-border flex justify-center items-center arrow-hover" @click="() => scrollItems(-1)">
                 <svg-icon type="mdi" :path="mdiArrowUp"></svg-icon>
             </div>
-            <div class="col-span-2 flex items-center justify-between custom-border px-4 text-white">
+            <div v-for="index in Array.from({ length: 3 }, (_, i) => i)" class="col-span-2 flex items-center justify-between custom-border px-4 text-white">
                 <div class="size-10"></div>
                 <div>
-                    {{ getLoggedItemStr(0) }}
-                </div>
-                <button @click="" type="button" class="flex items-center justify-center size-10 hover:bg-red-950 rounded-lg transition-colors duration-200 group">
-                    <svg-icon class="group-hover:text-red-600 text-white" type="mdi" :path="mdiTrashCan"></svg-icon>
-                </button>
-            </div>
-            <div class="col-span-2 flex items-center justify-between custom-border px-4 text-white">
-                <div class="size-10"></div>
-                <div>
-                    {{ getLoggedItemStr(1) }}
-                </div>
-                <button @click="" type="button" class="flex items-center justify-center size-10 hover:bg-red-950 rounded-lg transition-colors duration-200 group">
-                    <svg-icon class="group-hover:text-red-600 text-white" type="mdi" :path="mdiTrashCan"></svg-icon>
-                </button>
-            </div>
-            <div class="col-span-2 flex items-center justify-between custom-border px-4 text-white">
-                <div class="size-10"></div>
-                <div>
-                    {{ getLoggedItemStr(2) }}
+                    {{ getLoggedItemStr(index) }}
                 </div>
                 <button @click="" type="button" class="flex items-center justify-center size-10 hover:bg-red-950 rounded-lg transition-colors duration-200 group">
                     <svg-icon class="group-hover:text-red-600 text-white" type="mdi" :path="mdiTrashCan"></svg-icon>

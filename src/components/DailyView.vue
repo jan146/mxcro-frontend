@@ -4,7 +4,7 @@
             <AddItem @add-item-toggle="addItemToggle" />
         </div>
         <div class="size-full" v-else>
-            <DailyViewCalendar @add-item-toggle="addItemToggle" :loggedItems="props.loggedItems" @update-logged-items="updateLoggedItemsProxy" />
+            <DailyViewCalendar :dateStr="dateStr" @change-date="changeDate" @add-item-toggle="addItemToggle" :loggedItems="props.loggedItems" @update-logged-items="updateLoggedItemsProxy" />
         </div>
     </div>
 </template>
@@ -14,6 +14,9 @@
     import { ref, type Ref } from 'vue';
     import AddItem from './AddItem.vue';
     import DailyViewCalendar from './DailyViewCalendar.vue';
+    const today: Date = new Date();
+    let date: Date = new Date();
+    let dateStr: Ref<string> = ref(date.toLocaleString("en-GB", { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' }) + " (today)");
 
     let addItemShown: Ref<boolean> = ref(false);
     const emit = defineEmits({
@@ -33,4 +36,14 @@
         emit("updateLoggedItems", from_date, to_date);
     }
 
+    function changeDate(change: number) {
+        const target: Date = new Date(date.getTime() + change * (1000*60*60*24));
+        date = (target >= today ? today : target);
+        dateStr.value = date.toLocaleString("en-GB", { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' }) + (target >= today ? " (today)" : "");
+        if (target <= today) {
+            updateLoggedItemsProxy(date, date);
+        }
+    }
+
 </script>
+

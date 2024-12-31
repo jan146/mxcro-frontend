@@ -1,10 +1,10 @@
 <template>
     <div class="grid grid-cols-12 gap-0 custom-border rounded-md size-full">
-        <div @click="() => changeDate(-1)" class="col-span-2 custom-border flex justify-center items-center arrow-hover">
+        <div @click="changeDateLocal(-1)" class="col-span-2 custom-border flex justify-center items-center arrow-hover">
             <svg-icon type="mdi" :path="mdiArrowLeft"></svg-icon>
         </div>
-        <div class="col-span-8 custom-border flex justify-center items-center text-white font-semibold">{{dateStr}}</div>
-        <div @click="() => changeDate(1)" class="col-span-2 custom-border flex justify-center items-center arrow-hover">
+        <div class="col-span-8 custom-border flex justify-center items-center text-white font-semibold">{{props.dateStr}}</div>
+        <div @click="changeDateLocal(1)" class="col-span-2 custom-border flex justify-center items-center arrow-hover">
             <svg-icon type="mdi" :path="mdiArrowRight"></svg-icon>
         </div>
         <div class="col-span-10 row-span-3 grid grid-rows-5">
@@ -39,11 +39,9 @@
     import { mdiArrowUp, mdiArrowDown, mdiArrowLeft, mdiArrowRight, mdiPlusCircle, mdiTrashCan } from '@mdi/js';
     import { toTitleCase } from '@/utils/common';
 
-    const today: Date = new Date();
-    let date: Date = new Date();
-    let dateStr: Ref<string> = ref(date.toLocaleString("en-GB", { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' }) + " (today)");
     const props = defineProps({
         loggedItems: { type: Array<object>, required: true },
+        dateStr: { type: String, required: true },
     });
     let loggedItemsOffset: Ref<number> = ref(0);
     const emit = defineEmits({
@@ -51,17 +49,10 @@
             return (from_date instanceof Date && to_date instanceof Date);
         },
         addItemToggle: () => {return true},
-    });
-
-    function changeDate(change: number) {
-        const target: Date = new Date(date.getTime() + change * (1000*60*60*24));
-        date = (target >= today ? today : target);
-        dateStr.value = date.toLocaleString("en-GB", { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' }) + (target >= today ? " (today)" : "");
-        if (target <= today) {
-            loggedItemsOffset.value = 0;
-            emit("updateLoggedItems", date, date);
+        changeDate: (change: number) => {
+            return (change instanceof Number);
         }
-    }
+    });
 
     function scrollItems(change: number) {
         loggedItemsOffset.value += change;
@@ -80,6 +71,11 @@
         return getLoggedItemStrParametrized;
     }
 
+    function changeDateLocal(change: number) {
+        loggedItemsOffset.value = 0;
+        emit("changeDate", change);
+    }
+
 </script>
 
 <style scoped>
@@ -90,3 +86,4 @@
     @apply text-white hover:text-zinc-900 bg-zinc-900 hover:bg-white transition-colors duration-200;
 }
 </style>
+

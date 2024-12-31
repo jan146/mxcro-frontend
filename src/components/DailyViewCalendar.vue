@@ -31,6 +31,7 @@
     import { ref, type Ref, computed, type ComputedRef } from 'vue';
     import SvgIcon from '@jamescoyle/vue-icon';
     import { mdiArrowUp, mdiArrowDown, mdiArrowLeft, mdiArrowRight, mdiPlusCircle } from '@mdi/js';
+    import { toTitleCase } from '@/utils/common';
 
     const today: Date = new Date();
     let date: Date = new Date();
@@ -71,13 +72,6 @@
                 return "/";
         });
         return getLoggedItemStrParametrized;
-    }
-
-    function toTitleCase(str: string) {
-        return str.replace(
-            /\w\S*/g,
-            text => text.charAt(0).toUpperCase() + text.substring(1).toLowerCase()
-        );
     }
 
 </script>

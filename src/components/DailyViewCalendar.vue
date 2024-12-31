@@ -50,7 +50,7 @@
         },
         addItemToggle: () => {return true},
         changeDate: (change: number) => {
-            return (change instanceof Number);
+            return (typeof change === "number");
         }
     });
 

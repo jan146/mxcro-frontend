@@ -70,6 +70,8 @@
             .then(data => {
                 // successMessage.value = JSON.stringify(data);
                 successMessage.value = `Successfully submitted new entry:\n${weight.value} grams of ${foodName.value}`;
+                foodName.value = "";
+                weight.value = "";
             })
             .catch(err => errorMessage.value = err)
         }

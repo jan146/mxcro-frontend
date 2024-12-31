@@ -5,7 +5,7 @@
             <DailyView class="mt-4" :loggedItems="loggedItems" @update-logged-items="updateLoggedItems" />
         </div>
         <div class="w-1/3">
-            <Summary />
+            <Summary :loggedItems="loggedItems" />
         </div>
     </div>
 </template>

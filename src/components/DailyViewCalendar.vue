@@ -11,9 +11,9 @@
             <div class="col-span-2 custom-border flex justify-center items-center arrow-hover" @click="() => scrollItems(-1)">
                 <svg-icon type="mdi" :path="mdiArrowUp"></svg-icon>
             </div>
-            <div class="col-span-2 flex items-center custom-border px-1 text-white">{{ getLoggedItemStr(0) }}</div>
-            <div class="col-span-2 flex items-center custom-border px-1 text-white">{{ getLoggedItemStr(1) }}</div>
-            <div class="col-span-2 flex items-center custom-border px-1 text-white">{{ getLoggedItemStr(2) }}</div>
+            <div class="col-span-2 flex items-center justify-center custom-border px-1 text-white">{{ getLoggedItemStr(0) }}</div>
+            <div class="col-span-2 flex items-center justify-center custom-border px-1 text-white">{{ getLoggedItemStr(1) }}</div>
+            <div class="col-span-2 flex items-center justify-center custom-border px-1 text-white">{{ getLoggedItemStr(2) }}</div>
             <div class="col-span-2 custom-border flex justify-center items-center arrow-hover" @click="() => scrollItems(1)">
                 <svg-icon type="mdi" :path="mdiArrowDown"></svg-icon>
             </div>
@@ -65,7 +65,7 @@
             if (logged_item)
                 return `${logged_item.weight_g}g × ${toTitleCase(logged_item.name)}`;
             else
-                return "Entry";
+                return "/";
         });
         return getLoggedItemStrParametrized;
     }

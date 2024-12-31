@@ -1,7 +1,7 @@
 <template>
     <div class="w-80 h-80">
         <div class="size-full" v-if="addItemShown">
-            <AddItem @add-item-toggle="addItemToggle" />
+            <AddItem :date="date" @add-item-toggle="addItemToggle" @update-logged-items="updateLoggedItemsProxy" />
         </div>
         <div class="size-full" v-else>
             <DailyViewCalendar :dateStr="dateStr" @change-date="changeDate" @add-item-toggle="addItemToggle" :loggedItems="props.loggedItems" @update-logged-items="updateLoggedItemsProxy" />
@@ -38,7 +38,7 @@
 
     function changeDate(change: number) {
         const target: Date = new Date(date.getTime() + change * (1000*60*60*24));
-        date = (target >= today ? today : target);
+        date.setTime(target >= today ? today.getTime() : target.getTime());
         dateStr.value = date.toLocaleString("en-GB", { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' }) + (target >= today ? " (today)" : "");
         if (target <= today) {
             updateLoggedItemsProxy(date, date);

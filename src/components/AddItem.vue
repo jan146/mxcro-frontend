@@ -35,6 +35,16 @@
     const errorMessage: Ref<string> = ref("");
     const successMessage: Ref<string> = ref("");
 
+    const props = defineProps({
+        date: { type: Date, required: true },
+    });
+    const emit = defineEmits({
+        updateLoggedItems: (from_date: Date, to_date: Date) => {
+            return (from_date instanceof Date && to_date instanceof Date);
+        },
+        addItemToggle: () => {return true},
+    });
+
     function checkFood(): string {
         let error: string = "";
         const weightNum: number = parseInt(weight.value);
@@ -75,6 +85,7 @@
             })
             .catch(err => errorMessage.value = err)
         }
+        emit("updateLoggedItems", props.date, props.date);
     }
 
 </script>

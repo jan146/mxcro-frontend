@@ -16,9 +16,10 @@
                 <div>
                     {{ getLoggedItemStr(index) }}
                 </div>
-                <button @click="" type="button" class="flex items-center justify-center size-10 hover:bg-red-950 rounded-lg transition-colors duration-200 group">
+                <button v-if="loggedItemsOffset+index < loggedItems.length" @click="" type="button" class="flex items-center justify-center size-10 hover:bg-red-950 rounded-lg transition-colors duration-200 group">
                     <svg-icon class="group-hover:text-red-600 text-white" type="mdi" :path="mdiTrashCan"></svg-icon>
                 </button>
+                <div v-else class="size-10"></div>
             </div>
             <div class="col-span-2 custom-border flex justify-center items-center arrow-hover" @click="() => scrollItems(1)">
                 <svg-icon type="mdi" :path="mdiArrowDown"></svg-icon>

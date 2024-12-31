@@ -16,7 +16,7 @@
                 <div>
                     {{ getLoggedItemStr(index) }}
                 </div>
-                <button v-if="loggedItemsOffset+index < loggedItems.length" @click="" type="button" class="flex items-center justify-center size-10 hover:bg-red-950 rounded-lg transition-colors duration-200 group">
+                <button v-if="loggedItemsOffset+index < loggedItems.length" @click="deleteItem(index)" type="button" class="flex items-center justify-center size-10 hover:bg-red-950 rounded-lg transition-colors duration-200 group">
                     <svg-icon class="group-hover:text-red-600 text-white" type="mdi" :path="mdiTrashCan"></svg-icon>
                 </button>
                 <div v-else class="size-10"></div>
@@ -38,9 +38,11 @@
     import SvgIcon from '@jamescoyle/vue-icon';
     import { mdiArrowUp, mdiArrowDown, mdiArrowLeft, mdiArrowRight, mdiPlusCircle, mdiTrashCan } from '@mdi/js';
     import { toTitleCase } from '@/utils/common';
+    import { BACKEND_URL } from '@/utils/constants';
 
     const props = defineProps({
         loggedItems: { type: Array<object>, required: true },
+        date: { type: Date, required: true },
         dateStr: { type: String, required: true },
     });
     let loggedItemsOffset: Ref<number> = ref(0);
@@ -74,6 +76,23 @@
     function changeDateLocal(change: number) {
         loggedItemsOffset.value = 0;
         emit("changeDate", change);
+    }
+
+    function deleteItem(index: number) {
+        const loggedItem: object = props.loggedItems[loggedItemsOffset.value+index];
+        console.log(loggedItem);
+        console.log(loggedItem.id);
+        fetch(`${BACKEND_URL}/logged_item/${loggedItem.id}`, {
+            method: "DELETE",
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+            if (data.error)
+                console.error(data.error);
+            emit("updateLoggedItems", props.date, props.date);
+        })
+        .catch(err => console.error(err));
     }
 
 </script>

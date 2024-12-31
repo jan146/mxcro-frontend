@@ -4,7 +4,7 @@
             <AddItem :date="date" @add-item-toggle="addItemToggle" @update-logged-items="updateLoggedItemsProxy" />
         </div>
         <div class="size-full" v-else>
-            <DailyViewCalendar :dateStr="dateStr" @change-date="changeDate" @add-item-toggle="addItemToggle" :loggedItems="props.loggedItems" @update-logged-items="updateLoggedItemsProxy" />
+            <DailyViewCalendar :date="date" :dateStr="dateStr" @change-date="changeDate" @add-item-toggle="addItemToggle" :loggedItems="props.loggedItems" @update-logged-items="updateLoggedItemsProxy" />
         </div>
     </div>
 </template>

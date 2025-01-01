@@ -2,10 +2,10 @@
     <div class="w-full flex gap-4 justify-center">
         <div class="w-1/3">
             <UserInfo />
-            <DailyView class="mt-4" :loggedItems="loggedItems" :loggedItemsSelected="loggedItemsSelected" @update-logged-items="updateLoggedItems" @toggle-item="toggleItem" />
+            <DailyView class="mt-4" :loggedItems="loggedItems" :loggedItemsSelected="loggedItemsSelected" @update-logged-items="updateLoggedItems" @toggle-item="toggleItem" @clear-item-selection="clearItemSelection" />
         </div>
         <div class="w-1/3">
-            <Summary :loggedItems="loggedItems" />
+            <Summary :loggedItems="loggedItems" :loggedItemsSelected="loggedItemsSelected" />
         </div>
     </div>
 </template>
@@ -29,6 +29,10 @@
             loggedItemsSelected.push(loggedItem);
         else
             loggedItemsSelected.splice(index, 1);
+    }
+
+    function clearItemSelection() {
+        loggedItemsSelected.splice(0, loggedItemsSelected.length);
     }
 
     function updateLoggedItems(fromDate: Date, toDate: Date) {

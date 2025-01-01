@@ -21,11 +21,13 @@
 
     const props = defineProps({
         loggedItems: { type: Array<object>, required: true },
+        loggedItemsSelected: { type: Array<object>, required: true },
     });
 
     function getNutrientSummed(nutrient: string): number {
         let sum: number = 0;
-        for (const loggedItem of props.loggedItems)
+        const loggedItems_: Array<object> = props.loggedItemsSelected.length === 0 ? props.loggedItems : props.loggedItemsSelected;
+        for (const loggedItem of loggedItems_)
             sum += loggedItem[nutrient];
         return sum;
     }

@@ -26,6 +26,7 @@
         toggleItem: (loggedItem: object) => {
             return "id" in loggedItem;
         },
+        clearItemSelection: () => true,
     });
     const props = defineProps({
         loggedItems: { type: Array<object>, required: true },
@@ -50,6 +51,7 @@
         dateStr.value = date.toLocaleString("en-GB", { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' }) + (target >= today ? " (today)" : "");
         if (target <= today) {
             updateLoggedItemsProxy(date, date);
+            emit("clearItemSelection");
         }
     }
 

@@ -48,8 +48,8 @@
     });
     let loggedItemsOffset: Ref<number> = ref(0);
     const emit = defineEmits({
-        updateLoggedItems: (from_date: Date, to_date: Date) => {
-            return (from_date instanceof Date && to_date instanceof Date);
+        updateLoggedItems: (fromDate: Date, toDate: Date) => {
+            return (fromDate instanceof Date && toDate instanceof Date);
         },
         addItemToggle: () => {return true},
         changeDate: (change: number) => {

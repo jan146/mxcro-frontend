@@ -22,10 +22,10 @@
     const route: Route = useRoute();
     let loggedItems: Reactive<Array<object>> = reactive([]);
 
-    function updateLoggedItems(from_date: Date, to_date: Date) {
+    function updateLoggedItems(fromDate: Date, toDate: Date) {
         fetch(`${BACKEND_URL}/logged_item/${route.params.user_id}` + "?" + new URLSearchParams({
-            from: from_date.toLocaleDateString(),
-            to: to_date.toLocaleDateString(),
+            from: fromDate.toLocaleDateString(),
+            to: toDate.toLocaleDateString(),
         }).toString())
             .then(response => response.json())
             .then(data => {

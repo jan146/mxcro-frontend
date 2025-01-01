@@ -20,8 +20,8 @@
 
     let addItemShown: Ref<boolean> = ref(false);
     const emit = defineEmits({
-        updateLoggedItems: (from_date: Date, to_date: Date) => {
-            return (from_date instanceof Date && to_date instanceof Date);
+        updateLoggedItems: (fromDate: Date, toDate: Date) => {
+            return (fromDate instanceof Date && toDate instanceof Date);
         },
     });
     const props = defineProps({
@@ -32,8 +32,8 @@
         addItemShown.value = !addItemShown.value;
     }
 
-    function updateLoggedItemsProxy(from_date: Date, to_date: Date) {
-        emit("updateLoggedItems", from_date, to_date);
+    function updateLoggedItemsProxy(fromDate: Date, toDate: Date) {
+        emit("updateLoggedItems", fromDate, toDate);
     }
 
     function changeDate(change: number) {

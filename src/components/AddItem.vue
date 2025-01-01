@@ -66,7 +66,9 @@
         if (errorMessage.value)
             successMessage.value = "";
         else {
-            fetch(`${BACKEND_URL}/logged_item/${route.params.user_id}`, {
+            fetch(`${BACKEND_URL}/logged_item/${route.params.user_id}` + "?" + new URLSearchParams({
+                date: props.date.toLocaleDateString(),
+            }).toString(), {
                 headers: {
                     "Content-Type": "application/json",
                 },
@@ -79,6 +81,7 @@
             .then(response => response.json())
             .then(data => {
                 // successMessage.value = JSON.stringify(data);
+                emit("updateLoggedItems", props.date, props.date);
                 successMessage.value = `Successfully submitted new entry:\n${weight.value} grams of ${foodName.value}`;
                 foodName.value = "";
                 weight.value = "";

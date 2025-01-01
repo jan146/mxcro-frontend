@@ -1,11 +1,11 @@
 <template>
     <div>
-        <h1>This is the overview page for user with user_id: {{$route.params.user_id}}</h1>
-        <div class="flex flex-col w-full" v-if="username">
-            <div>Username: {{username}}</div>
-            <div>Age: {{age}}</div>
-            <div>Height: {{height}} cm</div>
-            <div>Weight: {{weight}} kg</div>
+        <!-- <h1>This is the overview page for user with user_id: {{$route.params.user_id}}</h1> -->
+        <div class="flex flex-col w-full text-white" v-if="username">
+            <div class="font-semibold">Username: {{username}}</div>
+            <div class="font-semibold">Age: {{age}}</div>
+            <div class="font-semibold">Height: {{height}} cm</div>
+            <div class="font-semibold">Weight: {{weight}} kg</div>
         </div>
         <div v-else-if="online">
             <div>Failed to get information about specified user</div> 

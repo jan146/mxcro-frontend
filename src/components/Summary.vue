@@ -8,7 +8,7 @@
                 {{getNutrientSummed(nutrient).toFixed(1)}}/{{NUTRIENTS_RDA[nutrient]}} ({{getNutrientPercentage(nutrient)}})
             </div>
             <div class="border-2 border-white mb-2 h-4 rounded-xl">
-                <div class="h-full bg-white rounded-xl" :style="{ width: getNutrientPercentage(nutrient) }"></div>
+                <div class="h-full bg-white rounded-xl" :style="{ maxWidth: getNutrientPercentage(nutrient) }"></div>
             </div>
         </div>
     </div>

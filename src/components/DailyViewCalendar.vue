@@ -66,7 +66,7 @@
         const getLoggedItemStrParametrized = computed<string>(() => {
             const logged_item: object = props.loggedItems[loggedItemsOffset.value+offset];
             if (logged_item)
-                return `${logged_item.weight_g}g × ${toTitleCase(logged_item.name)}`;
+                return `${Math.round(logged_item.weight_g)}g × ${toTitleCase(logged_item.name)}`;
             else
                 return "/";
         });

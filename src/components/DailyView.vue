@@ -1,5 +1,5 @@
 <template>
-    <div class="w-80 h-80">
+    <div class="w-80">
         <div class="size-full" v-if="addItemShown">
             <AddItem :date="date" @add-item-toggle="addItemToggle" @update-logged-items="updateLoggedItemsProxy" />
         </div>

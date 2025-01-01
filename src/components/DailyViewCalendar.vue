@@ -11,7 +11,7 @@
             <div class="col-span-2 custom-border flex justify-center items-center arrow-hover h-12" @click="() => scrollItems(-1)">
                 <svg-icon type="mdi" :path="mdiArrowUp"></svg-icon>
             </div>
-            <div v-for="index in Array.from({ length: 3 }, (_, i) => i)" class="col-span-2 flex items-center justify-between custom-border px-4 text-white h-12">
+            <div v-for="index in Array.from({ length: loggedItemsLength }, (_, i) => i)" class="col-span-2 flex items-center justify-between custom-border px-4 text-white h-12">
                 <div class="size-10"></div>
                 <div>
                     {{ getLoggedItemStr(index) }}
@@ -40,6 +40,7 @@
     import { toTitleCase } from '@/utils/common';
     import { BACKEND_URL } from '@/utils/constants';
 
+    const loggedItemsLength: number = 5;
     const props = defineProps({
         loggedItems: { type: Array<object>, required: true },
         date: { type: Date, required: true },
@@ -58,7 +59,7 @@
 
     function scrollItems(change: number) {
         loggedItemsOffset.value += change;
-        loggedItemsOffset.value = Math.min(props.loggedItems.length - 3, loggedItemsOffset.value);
+        loggedItemsOffset.value = Math.min(props.loggedItems.length - loggedItemsLength, loggedItemsOffset.value);
         loggedItemsOffset.value = Math.max(0, loggedItemsOffset.value);
     }
 

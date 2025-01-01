@@ -7,11 +7,11 @@
         <div @click="changeDateLocal(1)" class="col-span-2 custom-border flex justify-center items-center arrow-hover">
             <svg-icon type="mdi" :path="mdiArrowRight"></svg-icon>
         </div>
-        <div class="col-span-10 row-span-3 grid grid-rows-5">
-            <div class="col-span-2 custom-border flex justify-center items-center arrow-hover" @click="() => scrollItems(-1)">
+        <div class="col-span-10 row-span-3 grid">
+            <div class="col-span-2 custom-border flex justify-center items-center arrow-hover h-12" @click="() => scrollItems(-1)">
                 <svg-icon type="mdi" :path="mdiArrowUp"></svg-icon>
             </div>
-            <div v-for="index in Array.from({ length: 3 }, (_, i) => i)" class="col-span-2 flex items-center justify-between custom-border px-4 text-white">
+            <div v-for="index in Array.from({ length: 3 }, (_, i) => i)" class="col-span-2 flex items-center justify-between custom-border px-4 text-white h-12">
                 <div class="size-10"></div>
                 <div>
                     {{ getLoggedItemStr(index) }}
@@ -21,7 +21,7 @@
                 </button>
                 <div v-else class="size-10"></div>
             </div>
-            <div class="col-span-2 custom-border flex justify-center items-center arrow-hover" @click="() => scrollItems(1)">
+            <div class="col-span-2 custom-border flex justify-center items-center arrow-hover h-12" @click="() => scrollItems(1)">
                 <svg-icon type="mdi" :path="mdiArrowDown"></svg-icon>
             </div>
         </div>

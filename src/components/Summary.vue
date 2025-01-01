@@ -8,7 +8,7 @@
                 {{getNutrientSummed(nutrient).toFixed(1)}}/{{NUTRIENTS_RDA[nutrient]}} ({{getNutrientPercentage(nutrient)}})
             </div>
             <div class="border-2 border-white mb-2 h-4 rounded-xl">
-                <div class="h-full bg-white rounded-xl" :style="{ maxWidth: getNutrientPercentage(nutrient) }"></div>
+                <div class="h-full rounded-xl" :style="{ maxWidth: getNutrientPercentage(nutrient), backgroundColor: getBarColor(nutrient) }"></div>
             </div>
         </div>
     </div>
@@ -32,6 +32,17 @@
 
     function getNutrientPercentage(nutrient: string): string {
         return (100*getNutrientSummed(nutrient)/NUTRIENTS_RDA[nutrient]).toFixed(1) + "%";
+    }
+
+    function getBarColor(nutrient: string): string {
+        const percentage: number = 100*getNutrientSummed(nutrient)/NUTRIENTS_RDA[nutrient];
+        if (percentage <= 100)
+            return "white";
+        if (percentage <= 115)
+            return "yellow";
+        if (percentage <= 130)
+            return "orange";
+        return "red";
     }
 
 </script>

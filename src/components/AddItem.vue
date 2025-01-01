@@ -80,9 +80,16 @@
             })
             .then(response => response.json())
             .then(data => {
-                // successMessage.value = JSON.stringify(data);
-                emit("updateLoggedItems", props.date, props.date);
-                successMessage.value = `Successfully submitted new entry:\n${weight.value} grams of ${foodName.value}`;
+                console.log(data);
+                if (data.error) {
+                    successMessage.value = "";
+                    errorMessage.value = data.error;
+                }
+                else {
+                    successMessage.value = JSON.stringify(data);
+                    emit("updateLoggedItems", props.date, props.date);
+                    // successMessage.value = `Successfully submitted new entry:\n${weight.value} grams of ${foodName.value}`;
+                }
                 foodName.value = "";
                 weight.value = "";
             })

@@ -12,8 +12,8 @@
             <div class="p-1">
                 <button @click="submit" type="button" class="bg-zinc-500 text-base rounded-xl text-white p-2 font-semibold border-2 border-transparent hover:bg-zinc-100 hover:text-zinc-900 hover:border-zinc-900 transition-colors duration-200">Create</button>
             </div>
-            <div v-html="errorMessage" class="text-red-600 font-semibold text-lg px-2"></div>
-            <div v-html="successMessage" class="text-green-600 font-semibold text-lg px-2"></div>
+            <div v-html="errorMessage" class="text-red-600 font-semibold text-sm px-2 max-w-full break-words"></div>
+            <div v-html="successMessage" class="text-green-600 font-semibold text-sm px-2 max-w-full break-words"></div>
         </div>
         <div class="p-2 hover:bg-zinc-200 rounded-xl inline-block absolute top-0 left-0" @click="$emit('addItemToggle')">
             <svg-icon type="mdi" :path="mdiArrowLeft"></svg-icon>

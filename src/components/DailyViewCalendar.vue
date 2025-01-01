@@ -11,16 +11,16 @@
             <div class="col-span-2 custom-border flex justify-center items-center arrow-hover h-12" @click="() => scrollItems(-1)">
                 <svg-icon type="mdi" :path="mdiArrowUp"></svg-icon>
             </div>
-            <div v-for="index in Array.from({ length: loggedItemsLength }, (_, i) => i)" class="col-span-2 flex items-center justify-between custom-border px-4 text-white h-12">
+            <button v-for="index in Array.from({ length: loggedItemsLength }, (_, i) => i)" :class="['col-span-2', 'flex', 'items-center', 'justify-between', 'custom-border', 'px-4', 'text-white', 'h-12', 'group', getItemBgColor(index)]" @click="toggleItemProxy(index)">
                 <div class="size-10"></div>
-                <div>
+                <div class="group-hover:font-bold">
                     {{ getLoggedItemStr(index) }}
                 </div>
                 <button v-if="loggedItemsOffset+index < loggedItems.length" @click="deleteItem(index)" type="button" class="flex items-center justify-center size-10 hover:bg-red-950 rounded-lg transition-colors duration-200 group">
-                    <svg-icon class="group-hover:text-red-600 text-white" type="mdi" :path="mdiTrashCan"></svg-icon>
+                    <svg-icon class="group-last:group-hover:text-red-600 text-white" type="mdi" :path="mdiTrashCan"></svg-icon>
                 </button>
                 <div v-else class="size-10"></div>
-            </div>
+            </button>
             <div class="col-span-2 custom-border flex justify-center items-center arrow-hover h-12" @click="() => scrollItems(1)">
                 <svg-icon type="mdi" :path="mdiArrowDown"></svg-icon>
             </div>
@@ -43,6 +43,7 @@
     const loggedItemsLength: number = 5;
     const props = defineProps({
         loggedItems: { type: Array<object>, required: true },
+        loggedItemsSelected: { type: Array<object>, required: true },
         date: { type: Date, required: true },
         dateStr: { type: String, required: true },
     });
@@ -54,8 +55,24 @@
         addItemToggle: () => {return true},
         changeDate: (change: number) => {
             return (typeof change === "number");
-        }
+        },
+        toggleItem: (loggedItem: object) => {
+            return "id" in loggedItem;
+        },
     });
+
+    function getItemBgColor(index: number) {
+        const loggedItem: object = props.loggedItems[loggedItemsOffset.value+index];
+        if (props.loggedItemsSelected.includes(loggedItem))
+            return "bg-zinc-600 hover:bg-zinc-500";
+        return "bg-zinc-900 hover:bg-zinc-700";
+    }
+
+    function toggleItemProxy(index: number) {
+        const loggedItem: object = props.loggedItems[loggedItemsOffset.value+index];
+        if (loggedItem)
+            emit("toggleItem", loggedItem);
+    }
 
     function scrollItems(change: number) {
         loggedItemsOffset.value += change;

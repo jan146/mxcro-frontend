@@ -2,7 +2,7 @@
     <div class="w-full flex gap-4 justify-center">
         <div class="w-1/3">
             <UserInfo />
-            <DailyView class="mt-4" :loggedItems="loggedItems" @update-logged-items="updateLoggedItems" />
+            <DailyView class="mt-4" :loggedItems="loggedItems" :loggedItemsSelected="loggedItemsSelected" @update-logged-items="updateLoggedItems" @toggle-item="toggleItem" />
         </div>
         <div class="w-1/3">
             <Summary :loggedItems="loggedItems" />
@@ -21,6 +21,15 @@
 
     const route: Route = useRoute();
     let loggedItems: Reactive<Array<object>> = reactive([]);
+    let loggedItemsSelected: Reactive<Array<object>> = reactive([]);
+
+    function toggleItem(loggedItem: object) {
+        const index: number = loggedItemsSelected.indexOf(loggedItem);
+        if (index < 0)
+            loggedItemsSelected.push(loggedItem);
+        else
+            loggedItemsSelected.splice(index, 1);
+    }
 
     function updateLoggedItems(fromDate: Date, toDate: Date) {
         fetch(`${BACKEND_URL}/logged_item/${route.params.user_id}` + "?" + new URLSearchParams({

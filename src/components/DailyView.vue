@@ -4,7 +4,7 @@
             <AddItem :date="date" @add-item-toggle="addItemToggle" @update-logged-items="updateLoggedItemsProxy" />
         </div>
         <div class="size-full" v-else>
-            <DailyViewCalendar :date="date" :dateStr="dateStr" @change-date="changeDate" @add-item-toggle="addItemToggle" :loggedItems="props.loggedItems" @update-logged-items="updateLoggedItemsProxy" />
+            <DailyViewCalendar :date="date" :dateStr="dateStr" @change-date="changeDate" @add-item-toggle="addItemToggle" :loggedItems="props.loggedItems" :loggedItemsSelected="loggedItemsSelected" @update-logged-items="updateLoggedItemsProxy" @toggle-item="toggleItemProxy" />
         </div>
     </div>
 </template>
@@ -23,10 +23,18 @@
         updateLoggedItems: (fromDate: Date, toDate: Date) => {
             return (fromDate instanceof Date && toDate instanceof Date);
         },
+        toggleItem: (loggedItem: object) => {
+            return "id" in loggedItem;
+        },
     });
     const props = defineProps({
         loggedItems: { type: Array<object>, required: true },
+        loggedItemsSelected: { type: Array<object>, required: true },
     });
+
+    function toggleItemProxy(loggedItem: object) {
+        emit("toggleItem", loggedItem);
+    }
 
     function addItemToggle() {
         addItemShown.value = !addItemShown.value;

@@ -93,7 +93,7 @@
                 foodName.value = "";
                 weight.value = "";
             })
-            .catch(err => errorMessage.value = err)
+            .catch(err => errorMessage.value = err);
         }
         emit("updateLoggedItems", props.date, props.date);
     }

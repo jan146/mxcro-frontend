@@ -86,7 +86,7 @@
             })
             .then(response => response.json())
             .then(data => successMessage.value = JSON.stringify(data))
-            .catch(err => errorMessage.value = err)
+            .catch(err => errorMessage.value = err);
         }
 
     }

@@ -24,7 +24,7 @@
             else
                 router.push({ name: "overview", params: { user_id: data.id } });
         })
-        .catch(err => console.error(err))
+        .catch(err => console.error(err));
     }
 
     function logOut(event: KeyboardEvent | MouseEvent) {

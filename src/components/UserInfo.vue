@@ -50,7 +50,7 @@
             .catch(err => {
                 offline.value = true;
                 console.error(err);
-            })
+            });
     })
 
 </script>

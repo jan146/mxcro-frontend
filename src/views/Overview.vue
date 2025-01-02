@@ -3,6 +3,7 @@
         <button @click="logOut" class="absolute top-0 left-0 hover:bg-zinc-700 size-12 flex justify-center items-center rounded-lg">
             <svg-icon class="text-white" type="mdi" :path="mdiArrowLeft"></svg-icon>
         </button>
+        <DeleteUser />
         <div class="w-1/3">
             <UserInfo />
             <DailyView class="mt-4" :loggedItems="loggedItems" :loggedItemsSelected="loggedItemsSelected" @update-logged-items="updateLoggedItems" @toggle-item="toggleItem" @clear-item-selection="clearItemSelection" />
@@ -23,6 +24,7 @@
     import { useRoute, type RouteLocationNormalizedLoaded as Route, useRouter, type Router } from "vue-router";
     import { onMounted, reactive, type Reactive } from 'vue';
     import { BACKEND_URL } from '@/utils/constants';
+    import DeleteUser from "@/components/DeleteUser.vue";
 
     const router: Router = useRouter();
     const route: Route = useRoute();

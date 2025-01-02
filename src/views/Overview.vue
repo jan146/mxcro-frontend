@@ -1,5 +1,8 @@
 <template>
-    <div class="w-full flex gap-4 justify-center">
+    <div class="w-full flex gap-4 justify-center relative">
+        <button @click="logOut" class="absolute top-0 left-0 hover:bg-zinc-700 size-12 flex justify-center items-center rounded-lg">
+            <svg-icon class="text-white" type="mdi" :path="mdiArrowLeft"></svg-icon>
+        </button>
         <div class="w-1/3">
             <UserInfo />
             <DailyView class="mt-4" :loggedItems="loggedItems" :loggedItemsSelected="loggedItemsSelected" @update-logged-items="updateLoggedItems" @toggle-item="toggleItem" @clear-item-selection="clearItemSelection" />
@@ -15,13 +18,20 @@
     import DailyView from "@/components/DailyView.vue";
     import UserInfo from "@/components/UserInfo.vue";
     import Summary from "@/components/Summary.vue";
-    import { useRoute, type RouteLocationNormalizedLoaded as Route } from "vue-router";
+    import SvgIcon from '@jamescoyle/vue-icon';
+    import { mdiArrowLeft } from '@mdi/js';
+    import { useRoute, type RouteLocationNormalizedLoaded as Route, useRouter, type Router } from "vue-router";
     import { onMounted, reactive, type Reactive } from 'vue';
     import { BACKEND_URL } from '@/utils/constants';
 
+    const router: Router = useRouter();
     const route: Route = useRoute();
     let loggedItems: Reactive<Array<object>> = reactive([]);
     let loggedItemsSelected: Reactive<Array<object>> = reactive([]);
+
+    function logOut() {
+        router.push({ name: "home" });
+    }
 
     function toggleItem(loggedItem: object) {
         const index: number = loggedItemsSelected.indexOf(loggedItem);

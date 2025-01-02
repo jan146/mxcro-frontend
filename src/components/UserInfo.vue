@@ -34,7 +34,7 @@
     const offline: Ref<boolean> = ref(false);
 
     onMounted(() => {
-        fetch(`${BACKEND_URL}/user_info/${route.params.user_id}`)
+        fetch(`${BACKEND_URL}/user_info/id/${route.params.user_id}`)
             .then(response => response.json())
             .then(data => {
                 online.value = true;

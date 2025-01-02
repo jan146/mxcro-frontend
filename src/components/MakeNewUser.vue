@@ -72,7 +72,7 @@
         errorMessage.value = checkUser()
         successMessage.value = "";
         if (!errorMessage.value) {
-            fetch(`${BACKEND_URL}/user_info/123`, {
+            fetch(`${BACKEND_URL}/user_info/id/123`, {
                 headers: {
                     "Content-Type": "application/json",
                 },

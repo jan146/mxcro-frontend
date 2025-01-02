@@ -15,7 +15,7 @@
     const router: Router = useRouter();
     const username: Ref<string> = ref("janez");
     
-    function logOut() {
+    function switchUrl() {
         fetch(`${BACKEND_URL}/user_info/username/${username.value}`)
         .then(response => response.json())
         .then(data => {
@@ -25,6 +25,15 @@
                 router.push({ name: "overview", params: { user_id: data.id } });
         })
         .catch(err => console.error(err))
+    }
+
+    function logOut(event: KeyboardEvent | MouseEvent) {
+        if (event instanceof MouseEvent) {
+            switchUrl();
+        }
+        else if (event instanceof KeyboardEvent && event.key === "Enter") {
+            switchUrl();
+        }
     }
 
 </script>

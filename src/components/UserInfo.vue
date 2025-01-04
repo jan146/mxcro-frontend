@@ -6,6 +6,8 @@
             <div class="font-semibold">Age: {{age}}</div>
             <div class="font-semibold">Height: {{height}} cm</div>
             <div class="font-semibold">Weight: {{weight}} kg</div>
+            <div class="font-semibold">Gender: {{gender}}</div>
+            <div class="font-semibold">Activity level: {{activity_level}}</div>
         </div>
         <div v-else-if="online">
             <div>Failed to get information about specified user</div> 
@@ -24,12 +26,15 @@
     import { useRoute, type RouteLocationNormalizedLoaded as Route } from "vue-router";
     import { ref, type Ref, onMounted } from 'vue';
     import { BACKEND_URL } from '@/utils/constants';
+    import { toTitleCase } from "@/utils/common";
 
     const route: Route = useRoute();
     const username: Ref<string> = ref("");
     const age: Ref<string> = ref("");
     const height: Ref<string> = ref("");
     const weight: Ref<string> = ref("");
+    const gender: Ref<string> = ref("");
+    const activity_level: Ref<string> = ref("");
     const online: Ref<boolean> = ref(false);
     const offline: Ref<boolean> = ref(false);
 
@@ -43,6 +48,8 @@
                     age.value = data["age"];
                     height.value = data["height"];
                     weight.value = data["weight"];
+                    gender.value = (data["gender"] == "f" ? "Female" : "Male");
+                    activity_level.value = toTitleCase(data["activity_level"]);
                 }
                 else
                     console.error(data.error);

@@ -66,7 +66,7 @@
         if (errorMessage.value)
             successMessage.value = "";
         else {
-            fetch(`${BACKEND_URL}/api/v1/logged_item/${route.params.user_id}` + "?" + new URLSearchParams({
+            fetch(`${BACKEND_URL}/api/v1/logged_item/user/${route.params.user_id}` + "?" + new URLSearchParams({
                 date: props.date.toLocaleDateString(),
             }).toString(), {
                 headers: {

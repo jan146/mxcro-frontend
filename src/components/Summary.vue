@@ -5,7 +5,7 @@
                 {{toTitleCase(nutrient)}}
             </div>
             <div v-if="Object.keys(daily_rda).length > 0" class="flex justify-end w-full absolute top-0 left-0 text-white">
-                {{getNutrientSummed(nutrient).toFixed(1)}}/{{daily_rda[nutrient]}} ({{getNutrientPercentage(nutrient)}})
+                {{getNutrientSummed(nutrient).toFixed(1)}}/{{Math.round(daily_rda[nutrient])}} ({{getNutrientPercentage(nutrient)}})
             </div>
             <div v-if="Object.keys(daily_rda).length > 0" class="border-2 border-white mb-2 h-4 rounded-xl">
                 <div class="h-full rounded-xl" :style="{ maxWidth: getNutrientPercentage(nutrient), backgroundColor: getBarColor(nutrient) }"></div>

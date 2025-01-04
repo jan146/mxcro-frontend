@@ -4,10 +4,10 @@
             <div class="text-white font-medium">
                 {{toTitleCase(nutrient)}}
             </div>
-            <div class="flex justify-end w-full absolute top-0 left-0 text-white">
-                {{getNutrientSummed(nutrient).toFixed(1)}}/{{NUTRIENTS_RDA[nutrient]}} ({{getNutrientPercentage(nutrient)}})
+            <div v-if="Object.keys(daily_rda).length > 0" class="flex justify-end w-full absolute top-0 left-0 text-white">
+                {{getNutrientSummed(nutrient).toFixed(1)}}/{{daily_rda[nutrient]}} ({{getNutrientPercentage(nutrient)}})
             </div>
-            <div class="border-2 border-white mb-2 h-4 rounded-xl">
+            <div v-if="Object.keys(daily_rda).length > 0" class="border-2 border-white mb-2 h-4 rounded-xl">
                 <div class="h-full rounded-xl" :style="{ maxWidth: getNutrientPercentage(nutrient), backgroundColor: getBarColor(nutrient) }"></div>
             </div>
         </div>
@@ -16,12 +16,31 @@
 
 <script setup lang="ts">
 
+    import { useRoute, type RouteLocationNormalizedLoaded as Route } from "vue-router";
     import { toTitleCase } from '@/utils/common';
-    import { NUTRIENTS_ORDERED, NUTRIENTS_RDA } from '@/utils/constants';
+    import { BACKEND_URL, NUTRIENTS_ORDERED } from '@/utils/constants';
+    import { onMounted, reactive, type Reactive } from 'vue';
 
+    const route: Route = useRoute();
     const props = defineProps({
         loggedItems: { type: Array<object>, required: true },
         loggedItemsSelected: { type: Array<object>, required: true },
+    });
+
+    let daily_rda: Reactive<{ [key: string]: number }> = reactive({});
+
+    onMounted(() => {
+        fetch(`${BACKEND_URL}/user_info/daily_rda/${route.params.user_id}`)
+        .then(response => response.json())
+        .then(data => {
+            if (data.error)
+                console.error(data.error);
+            else {
+                for (const key in data)
+                    daily_rda[key] = data[key];
+            }
+        })
+        .catch(err => console.error(err));
     });
 
     function getNutrientSummed(nutrient: string): number {
@@ -33,11 +52,11 @@
     }
 
     function getNutrientPercentage(nutrient: string): string {
-        return (100*getNutrientSummed(nutrient)/NUTRIENTS_RDA[nutrient]).toFixed(1) + "%";
+        return (100*getNutrientSummed(nutrient)/daily_rda[nutrient]).toFixed(1) + "%";
     }
 
     function getBarColor(nutrient: string): string {
-        const percentage: number = 100*getNutrientSummed(nutrient)/NUTRIENTS_RDA[nutrient];
+        const percentage: number = 100*getNutrientSummed(nutrient)/daily_rda[nutrient];
         if (percentage <= 100)
             return "white";
         if (percentage <= 115)

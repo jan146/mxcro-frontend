@@ -30,7 +30,7 @@
     let daily_rda: Reactive<{ [key: string]: number }> = reactive({});
 
     onMounted(() => {
-        fetch(`${BACKEND_URL}/user_info/daily_rda/${route.params.user_id}`)
+        fetch(`${BACKEND_URL}/api/v1/user_info/daily_rda/${route.params.user_id}`)
         .then(response => response.json())
         .then(data => {
             if (data.error)

@@ -100,7 +100,7 @@
         const loggedItem: object = props.loggedItems[loggedItemsOffset.value+index];
         console.log(loggedItem);
         console.log(loggedItem.id);
-        fetch(`${BACKEND_URL}/logged_item/${loggedItem.id}`, {
+        fetch(`${BACKEND_URL}/api/v1/logged_item/${loggedItem.id}`, {
             method: "DELETE",
         })
         .then(response => response.json())

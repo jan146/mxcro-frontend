@@ -16,7 +16,7 @@
     const username: Ref<string> = ref("janez");
     
     function switchUrl() {
-        fetch(`${BACKEND_URL}/user_info/username/${username.value}`)
+        fetch(`${BACKEND_URL}/api/v1/user_info/username/${username.value}`)
         .then(response => response.json())
         .then(data => {
             if (data.error)

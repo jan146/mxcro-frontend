@@ -96,7 +96,7 @@
         successMessage.value = "";
 
         if (!errorMessage.value) {
-            fetch(`${BACKEND_URL}/user_info/`, {
+            fetch(`${BACKEND_URL}/api/v1/user_info/`, {
                 headers: {
                     "Content-Type": "application/json",
                 },

@@ -13,7 +13,7 @@
     const router: Router = useRouter();
 
     function deleteUser() {
-        fetch(`${BACKEND_URL}/user_info/id/${route.params.user_id}`, {
+        fetch(`${BACKEND_URL}/api/v1/user_info/id/${route.params.user_id}`, {
             method: "DELETE",
         })
         .then(response => response.json())

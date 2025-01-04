@@ -31,3 +31,12 @@ export const NUTRIENTS_RDA: StringToNumber = {
     "cholesterol": 300,
 };
 
+export const ACTIVITY_LEVELS: Array<string> = [
+    "sedentary",
+    "light",
+    "moderate",
+    "high",
+    "very_high",
+    "extreme",
+];
+

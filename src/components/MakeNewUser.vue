@@ -17,7 +17,23 @@
             <div class="text-lg text-white">Weight:</div>
             <input v-model="weight" type="text" class="text-lg w-24 text-black"/>
         </div>
+        <form>
+            <div class="text-lg text-white">Gender:</div>
+            <input type="radio" id="male" name="gender" value="m" v-model="gender">
+            <label class="px-2" for="male">Male</label><br>
+            <input type="radio" id="female" name="gender" value="f" v-model="gender">
+            <label class="px-2" for="female">Female</label><br>
+        </form>
+        <form>
+            <div class="text-lg text-white">Activity level:</div>
+            <div v-for="activity_level_str in ACTIVITY_LEVELS">
+                <input type="radio" :id=activity_level_str name="activity_level" :value=activity_level_str v-model="activity_level">
+                <label class="px-2" :for=activity_level_str>{{toTitleCase(activity_level_str)}}</label>
+                <br>
+            </div>
+        </form>
     </div>
+    <br>
     <button @click="createUser" type="button" class="bg-gray-500 text-base border-4 border-white rounded-md text-white p-1 font-semibold">Create</button>
     <div v-html="errorMessage" class="text-red-600 font-semibold text-lg"></div>
     <div v-html="successMessage" class="text-green-600 font-semibold text-lg"></div>
@@ -26,7 +42,8 @@
 <script setup lang="ts">
 
     import { ref, type Ref } from 'vue';
-    import { BACKEND_URL } from "@/utils/constants";
+    import { ACTIVITY_LEVELS, BACKEND_URL } from "@/utils/constants";
+    import { toTitleCase } from '@/utils/common';
     
     const errorMessage: Ref<string> = ref("");
     const successMessage: Ref<string> = ref("");
@@ -34,6 +51,8 @@
     const age: Ref<string> = ref("");
     const height: Ref<string> = ref("");
     const weight: Ref<string> = ref("");
+    const gender: Ref<string> = ref("");
+    const activity_level: Ref<string> = ref("");
 
     function checkUser(): string {
         let error = "";
@@ -53,6 +72,10 @@
         if (ageNum < 15 || ageNum > 100)
             error = "age must be between 15 and 100";
             
+        if (!activity_level.value)
+            error = "activity level is missing";
+        if (!gender.value)
+            error = "gender is missing";
         if (!weight.value)
             error = "weight is missing";
         if (!height.value)
@@ -71,6 +94,7 @@
 
         errorMessage.value = checkUser()
         successMessage.value = "";
+
         if (!errorMessage.value) {
             fetch(`${BACKEND_URL}/user_info/`, {
                 headers: {
@@ -82,6 +106,8 @@
                     "age": age.value,
                     "height": height.value,
                     "weight": weight.value,
+                    "gender": gender.value,
+                    "activity_level": activity_level.value,
                 }),
             })
             .then(response => response.json())

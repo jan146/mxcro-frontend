@@ -98,14 +98,11 @@
 
     function deleteItem(index: number) {
         const loggedItem: object = props.loggedItems[loggedItemsOffset.value+index];
-        console.log(loggedItem);
-        console.log(loggedItem.id);
         fetch(`${BACKEND_URL}/api/v1/logged_item/${loggedItem.id}`, {
             method: "DELETE",
         })
         .then(response => response.json())
         .then(data => {
-            console.log(data);
             if (data.error)
                 console.error(data.error);
             emit("updateLoggedItems", props.date, props.date);

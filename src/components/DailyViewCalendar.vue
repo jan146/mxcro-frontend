@@ -59,6 +59,7 @@
         toggleItem: (loggedItem: object) => {
             return "id" in loggedItem;
         },
+        clearItemSelection: () => true,
     });
 
     function getItemBgColor(index: number) {
@@ -105,7 +106,10 @@
         .then(data => {
             if (data.error)
                 console.error(data.error);
+            // Update logged items
             emit("updateLoggedItems", props.date, props.date);
+            // Unselect everything
+            emit("clearItemSelection");
         })
         .catch(err => console.error(err));
     }

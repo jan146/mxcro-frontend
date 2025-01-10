@@ -1,0 +1,13 @@
+apiVersion: v2
+name: helm-mxcro-frontend
+description: A helm chart for deploying the frontend for mxcro app
+type: application
+version: 0.1.0
+appVersion: "1.0.0"
+keywords:
+  - mxcro
+  - frontend
+sources:
+  - https://github.com/jan146/mxcro/
+  - https://github.com/jan146/mxcro-frontend/
+

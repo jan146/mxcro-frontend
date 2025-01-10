@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mxcro-frontend-deployment
+  labels:
+    app: mxcro
+    microservice: frontend
+spec:
+  replicas: {{ .Values.replicaCount }}
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: {{ .Values.maxUnavailable }}
+      maxSurge: {{ .Values.maxSurge }}
+  selector:
+    matchLabels:
+      app: mxcro
+      microservice: frontend
+  template:
+    metadata:
+      labels:
+        app: mxcro
+        microservice: frontend
+    spec:
+      containers:
+      - name: mxcro-frontend
+        image: jan146/mxcro-frontend:{{ .Values.imageTag }}
+        imagePullPolicy: Always
+        ports:
+        - name: bun
+          containerPort: {{ .Values.portNumber }}
+        env:
+        - name: VITE_BACKEND_URL
+          value: "http://mxcro-shared-ingress-nginx-controller.default.svc.cluster.local"
+

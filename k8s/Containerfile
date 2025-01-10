@@ -2,6 +2,7 @@ FROM oven/bun:1.1-alpine
 
 WORKDIR /app
 COPY . .
+ENV VITE_BACKEND_URL=""
 RUN bun install && \
     bun run build-only
 

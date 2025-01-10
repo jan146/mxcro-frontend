@@ -8,6 +8,12 @@ Frontend for [mxcro](https://github.com/jan146/mxcro), made with Vue.js, TypeScr
 bun install
 ```
 
+## Set backend url using environment variable
+
+```sh
+export VITE_BACKEND_URL="http://localhost:5000"
+```
+
 ### Compile and Hot-Reload for Development
 
 ```sh

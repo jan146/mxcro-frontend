@@ -35,6 +35,7 @@
 <script setup lang="ts">
 
     import { ref, type Ref, computed, type ComputedRef } from 'vue';
+    // @ts-ignore
     import SvgIcon from '@jamescoyle/vue-icon';
     import { mdiArrowUp, mdiArrowDown, mdiArrowLeft, mdiArrowRight, mdiPlusCircle, mdiTrashCan } from '@mdi/js';
     import { toTitleCase } from '@/utils/common';
@@ -85,6 +86,7 @@
         const getLoggedItemStrParametrized = computed<string>(() => {
             const logged_item: object = props.loggedItems[loggedItemsOffset.value+offset];
             if (logged_item)
+                // @ts-ignore
                 return `${Math.round(logged_item.weight_g)}g × ${toTitleCase(logged_item.name)}`;
             else
                 return "/";
@@ -99,6 +101,7 @@
 
     function deleteItem(index: number) {
         const loggedItem: object = props.loggedItems[loggedItemsOffset.value+index];
+        // @ts-ignore
         fetch(`${BACKEND_URL}/api/v1/logged_item/${loggedItem.id}`, {
             method: "DELETE",
         })

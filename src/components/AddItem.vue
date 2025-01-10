@@ -25,6 +25,7 @@
 
     import { useRoute, type RouteLocationNormalizedLoaded as Route } from "vue-router";
     import { ref, type Ref } from 'vue';
+    // @ts-ignore
     import SvgIcon from '@jamescoyle/vue-icon';
     import { mdiArrowLeft } from '@mdi/js';
     import { BACKEND_URL } from '@/utils/constants';

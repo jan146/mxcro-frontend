@@ -19,6 +19,7 @@
     import DailyView from "@/components/DailyView.vue";
     import UserInfo from "@/components/UserInfo.vue";
     import Summary from "@/components/Summary.vue";
+    // @ts-ignore
     import SvgIcon from '@jamescoyle/vue-icon';
     import { mdiArrowLeft } from '@mdi/js';
     import { useRoute, type RouteLocationNormalizedLoaded as Route, useRouter, type Router } from "vue-router";

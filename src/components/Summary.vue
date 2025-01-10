@@ -47,6 +47,7 @@
         let sum: number = 0;
         const loggedItems_: Array<object> = props.loggedItemsSelected.length === 0 ? props.loggedItems : props.loggedItemsSelected;
         for (const loggedItem of loggedItems_)
+            // @ts-ignore
             sum += loggedItem[nutrient];
         return sum;
     }

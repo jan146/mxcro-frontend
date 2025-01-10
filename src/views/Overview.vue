@@ -27,6 +27,9 @@
     import { BACKEND_URL } from '@/utils/constants';
     import DeleteUser from "@/components/DeleteUser.vue";
 
+    console.log("Backend url type:", typeof BACKEND_URL);
+    console.log("Backend url value:", BACKEND_URL);
+
     const router: Router = useRouter();
     const route: Route = useRoute();
     let loggedItems: Reactive<Array<object>> = reactive([]);

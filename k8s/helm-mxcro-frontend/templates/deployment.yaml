@@ -32,5 +32,5 @@ spec:
           containerPort: {{ .Values.portNumber }}
         env:
         - name: VITE_BACKEND_URL
-          value: "http://mxcro-shared-ingress-nginx-controller.default.svc.cluster.local"
+          value: ""
 

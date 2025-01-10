@@ -25,3 +25,9 @@ bun dev
 ```sh
 bun run build
 ```
+
+### Run production build
+
+```sh
+bun run vite preview [--host] [--port portNumber]
+```

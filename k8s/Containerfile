@@ -6,5 +6,5 @@ RUN bun install && \
     bun run build-only
 
 EXPOSE 5173
-CMD ["bun", "run", "vite", "preview", "--host", "--port", "5173"]
+ENTRYPOINT ["bun", "run", "vite", "preview"]
 

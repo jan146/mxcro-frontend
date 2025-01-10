@@ -26,6 +26,7 @@ spec:
       - name: mxcro-frontend
         image: jan146/mxcro-frontend:{{ .Values.imageTag }}
         imagePullPolicy: Always
+        args: ["--host", "--port", "{{ .Values.portNumber }}"]
         ports:
         - name: bun
           containerPort: {{ .Values.portNumber }}

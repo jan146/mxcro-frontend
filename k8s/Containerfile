@@ -3,7 +3,7 @@ FROM oven/bun:1.1-alpine
 WORKDIR /app
 COPY . .
 RUN bun install && \
-    bun run build
+    bun run build-only
 
 EXPOSE 5173
 CMD ["bun", "run", "vite", "preview", "--host", "--port", "5173"]

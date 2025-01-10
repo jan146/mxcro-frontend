@@ -67,7 +67,7 @@
             successMessage.value = "";
         else {
             fetch(`${BACKEND_URL}/api/v1/logged_item/user/${route.params.user_id}` + "?" + new URLSearchParams({
-                date: props.date.toLocaleDateString(),
+                date: props.date.toLocaleDateString("en-GB"),
             }).toString(), {
                 headers: {
                     "Content-Type": "application/json",

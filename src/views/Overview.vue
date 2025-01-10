@@ -49,8 +49,8 @@
 
     function updateLoggedItems(fromDate: Date, toDate: Date) {
         fetch(`${BACKEND_URL}/api/v1/logged_item/user/${route.params.user_id}` + "?" + new URLSearchParams({
-            from: fromDate.toLocaleDateString(),
-            to: toDate.toLocaleDateString(),
+            from: fromDate.toLocaleDateString("en-GB"),
+            to: toDate.toLocaleDateString("en-GB"),
         }).toString())
             .then(response => response.json())
             .then(data => {

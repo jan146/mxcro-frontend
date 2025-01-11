@@ -7,5 +7,5 @@ replicaCount: 3
 maxUnavailable: 1
 maxSurge: 1
 portNumber: 5173
-serviceType: LoadBalancer
+serviceType: NodePort
 

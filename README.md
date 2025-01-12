@@ -8,7 +8,7 @@ Frontend for [mxcro](https://github.com/jan146/mxcro), made with Vue.js, TypeScr
 bun install
 ```
 
-## Set backend url using environment variable
+### Set backend url using environment variable
 
 ```sh
 export VITE_BACKEND_URL="http://localhost:5000"
@@ -31,3 +31,15 @@ bun run build
 ```sh
 bun run vite preview [--host] [--port portNumber]
 ```
+
+## Run in Kubernetes cluster
+You can also run the application in a k8s cluster.
+For that, we provided a Helm chart.
+
+```sh
+# Install dependencies
+helm dependency build k8s/helm-mxcro-frontend
+# Install the chart
+helm upgrade --install mxcro-frontend k8s/helm-mxcro-frontend
+```
+This will install a NodePort service, which you can either expose using an Ingress or by changing it to a LoadBalancer.
